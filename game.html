@@ -77,7 +77,41 @@
 			if(!onMargin())
 				behindLine = addLine();//.push({'x':playerX,'y':playerY});
 			else
+			{
+			   if ( behindLine.length > 1){
+					updateMarginLine();
+				}
+
 				behindLine = [{'x': playerX, 'y': playerY}];
+			}
+		}
+
+		function determine_direction( poz)
+		{
+			var stop;
+			var i;
+			for ( i = poz; i < marginLine.length ; i++)
+			     if(playerX== marginLine[i].x && playerY == marginLine[i].y )
+					break;
+			if(i==marginLine.length)
+			{
+				for ( i = 0; i < poz ; i++)
+			     if(playerX== marginLine[i].x && playerY == marginLine[i].y )
+					break;
+			}
+		  var total= marginLine.length; //nr total de liniute
+
+		}
+
+		function updateMarginLine(){
+			var first;
+			for (var i = 0; i< marginLine.length; i++){
+				if (behindLine[0].x== marginLine[i].x && behindLine[0].y == marginLine[i].y)
+					{determine_direction(i);
+					//mark();
+					break;
+					}
+				}
 		}
 
 		function addLine() {
@@ -90,6 +124,7 @@
 			auxBehindLine.push({'x':playerX,'y':playerY});
 			return auxBehindLine;
 		}
+
 
 		function onMargin() {
 			for (var i = 1; i< marginLine.length; i++){
