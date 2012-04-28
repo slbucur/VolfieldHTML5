@@ -7,9 +7,21 @@
 <body>
 	<canvas id="canvas" width="640px" height="480px"> </canvas>
 	<script>
+		var canvas_margin = 20;
+		var width = 640;
+		var height = 480;
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext( '2d' );
-		context.fillRect(10,10,50,50);
+		context.fillRect(0,0,width,height);
+		context.strokeStyle = "yellow";
+		context.beginPath();
+		context.moveTo(canvas_margin, canvas_margin);
+		context.lineTo(canvas_margin, height - canvas_margin);
+		context.lineTo(width - canvas_margin,height - canvas_margin);
+		context.lineTo(width - canvas_margin,canvas_margin);
+		context.lineTo(canvas_margin, canvas_margin);
+		context.closePath();
+		context.stroke();
     </script>
 </body>
 </html>
