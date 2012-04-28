@@ -13,6 +13,9 @@
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext( '2d' );
 
+		function mainLoop(){
+
+		context.fillStyle = "black";
 		context.fillRect(0,0,width,height);
 		context.strokeStyle = "yellow";
 		context.beginPath();
@@ -29,6 +32,9 @@
 		context.arc(canvas_margin, canvas_margin, 10, 0, 2*Math.PI, true);
 		context.closePath();
 		context.fill();
+		}
+
+		setInterval(mainLoop,500);
 
     </script>
 </body>
