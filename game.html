@@ -15,6 +15,7 @@
 		var playerX = canvas_margin;
 		var	playerY = canvas_margin;
 		var speed = 5;
+		var behindLine = [{'x': playerX, 'y': playerY}];
 		window.addEventListener("keydown",doKeyDown,true);
 
 		function mainLoop(){
@@ -36,6 +37,16 @@
 		context.arc(playerX, playerY, 10, 0, 2*Math.PI, true);
 		context.closePath();
 		context.fill();
+
+		for(var i = 1; i < behindLine.length ; i++ )
+		{
+			context.strokeStyle = "blue";
+		    context.beginPath();
+		    context.moveTo(behindLine[i-1].x,behindLine[i-1].y);
+		    context.lineTo(behindLine[i].x,behindLine[i].y);
+		    context.closePath();
+			context.stroke();
+		}
 		}
 
 		function doKeyDown(event) {
@@ -61,6 +72,7 @@
 							playerX = width - canvas_margin;
 						break;
 			}
+			 behindLine.push({'x':playerX,'y':playerY});
 		}
 
 		setInterval(mainLoop,33);
