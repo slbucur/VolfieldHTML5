@@ -16,29 +16,39 @@
 		var	playerY = canvas_margin;
 		var speed = 5;
 		var behindLine = [{'x': playerX, 'y': playerY}];
+		var marginLine = [{'x': canvas_margin, 'y': canvas_margin}];;
 		window.addEventListener("keydown",doKeyDown,true);
+
+		for(var i = canvas_margin+5;i<=height-canvas_margin;i+=5)
+		{
+			marginLine.push({'x':canvas_margin,'y':i});
+		}
+		for(var i = canvas_margin;i<=width-canvas_margin;i+=5)
+		{
+			marginLine.push({'x':i,'y':height-canvas_margin});
+		}
+		for(var i = height-canvas_margin;i >= canvas_margin;i-=5)
+		{
+			marginLine.push({'x':width-canvas_margin,'y':i});
+		}
+		for(var i = width-canvas_margin;i >= canvas_margin;i-=5)
+		{
+			marginLine.push({'x':i,'y':canvas_margin});
+		}
 
 		function mainLoop(){
 
 		context.fillStyle = "black";
 		context.fillRect(0,0,width,height);
-		context.strokeStyle = "yellow";
-		context.beginPath();
-		context.moveTo(canvas_margin, canvas_margin);
-		context.lineTo(canvas_margin, height - canvas_margin);
-		context.lineTo(width - canvas_margin,height - canvas_margin);
-		context.lineTo(width - canvas_margin,canvas_margin);
-		context.lineTo(canvas_margin, canvas_margin);
-		context.closePath();
-		context.stroke();
-
+		drawLine(marginLine,"yellow");
+		drawLine(behindLine,"pink");
 		context.fillStyle = "red";
 		context.beginPath();
 		context.arc(playerX, playerY, 10, 0, 2*Math.PI, true);
 		context.closePath();
 		context.fill();
 
-		drawLine();
+
 		}
 
 		function doKeyDown(event) {
@@ -84,13 +94,14 @@
 		function onMargin() {
 			return playerX == canvas_margin || playerX == width - canvas_margin || playerY == height - canvas_margin || playerY == canvas_margin;
 		}
-		function drawLine() {
-			for(var i = 1; i < behindLine.length ; i++ )
+
+		function drawLine(line,color) {
+			for(var i = 1; i < line.length ; i++ )
 			{
-				context.strokeStyle = "blue";
+				context.strokeStyle = color;
 				context.beginPath();
-				context.moveTo(behindLine[i-1].x,behindLine[i-1].y);
-				context.lineTo(behindLine[i].x,behindLine[i].y);
+				context.moveTo(line[i-1].x,line[i-1].y);
+				context.lineTo(line[i].x,line[i].y);
 				context.closePath();
 				context.stroke();
 			}
