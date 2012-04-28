@@ -69,7 +69,7 @@ function doKeyDown(event) {
 		behindLine = addLine();//.push({'x':playerX,'y':playerY});
 	else
 	{
-	   if ( behindLine.length > 1){
+	   if ( behindLine.length > 3){
 			updateMarginLine();
 		}
 
@@ -134,7 +134,7 @@ function addLine() {
 
 
 function onMargin() {
-	for (var i = 1; i< marginLine.length; i++){
+	for (var i = 0; i< marginLine.length; i++){
 		if (playerX == marginLine[i].x && playerY == marginLine[i].y)
 		return true;
 	}
