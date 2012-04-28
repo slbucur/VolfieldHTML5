@@ -72,7 +72,14 @@
 							playerX = width - canvas_margin;
 						break;
 			}
-			 behindLine.push({'x':playerX,'y':playerY});
+			if(!onMargin())
+				behindLine.push({'x':playerX,'y':playerY});
+			else
+				behindLine = [{'x': playerX, 'y': playerY}];
+		}
+
+		function onMargin() {
+			return playerX == canvas_margin || playerX == width - canvas_margin || playerY == height - canvas_margin || playerY == canvas_margin;
 		}
 
 		setInterval(mainLoop,33);
