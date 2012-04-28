@@ -12,6 +12,10 @@
 		var height = 480;
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext( '2d' );
+		var playerX = canvas_margin;
+		var	playerY = canvas_margin;
+		var speed = 2;
+		window.addEventListener("keydown",doKeyDown,true);
 
 		function mainLoop(){
 
@@ -29,12 +33,29 @@
 
 		context.fillStyle = "red";
 		context.beginPath();
-		context.arc(canvas_margin, canvas_margin, 10, 0, 2*Math.PI, true);
+		context.arc(playerX, playerY, 10, 0, 2*Math.PI, true);
 		context.closePath();
 		context.fill();
 		}
 
-		setInterval(mainLoop,500);
+		function doKeyDown(event) {
+			switch (event.keyCode) {
+					case 38: /*Up arrow*/
+						playerY-=speed;
+						break;
+					case 40: /*Down arrow*/
+						playerY +=speed;
+						break;
+					case 37: /*Left arrow*/
+						playerX -=speed;
+						break;
+					case 39: /*Right arrow*/
+						playerX +=speed;
+						break;
+			}
+		}
+
+		setInterval(mainLoop,33);
 
     </script>
 </body>
