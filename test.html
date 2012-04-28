@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Volfield HTML5</title>
+</head>
+<body>
+	<canvas id="canvas" width="640px" height="480px"> </canvas>
+	<script src = "game.js" ></script>
+	<script>
+		run_tests();
+
+		function test_onMargin(){
+			if(onMargin() == true)
+				return true;
+			else
+				return false;
+		}
+		function test_onMargin_moved(){
+			playerX += 5;
+			playerY += 5;
+			if(onMargin() != true)
+				return true;
+			else
+				return false;
+		}
+		function run_tests(){
+			console.log("Test on margin : ",test_onMargin());
+			console.log("Test not on margin : ", test_onMargin_moved());
+		}
+    </script>
+</body>
+</html>
