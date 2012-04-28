@@ -38,15 +38,7 @@
 		context.closePath();
 		context.fill();
 
-		for(var i = 1; i < behindLine.length ; i++ )
-		{
-			context.strokeStyle = "blue";
-		    context.beginPath();
-		    context.moveTo(behindLine[i-1].x,behindLine[i-1].y);
-		    context.lineTo(behindLine[i].x,behindLine[i].y);
-		    context.closePath();
-			context.stroke();
-		}
+		drawLine();
 		}
 
 		function doKeyDown(event) {
@@ -73,13 +65,35 @@
 						break;
 			}
 			if(!onMargin())
-				behindLine.push({'x':playerX,'y':playerY});
+				behindLine = addLine();//.push({'x':playerX,'y':playerY});
 			else
 				behindLine = [{'x': playerX, 'y': playerY}];
 		}
 
+		function addLine() {
+			var auxBehindLine = [{'x': behindLine[0].x, 'y': behindLine[0].y}];
+			for( var i =1;i<behindLine.length;i++)
+				if(playerX == behindLine[i].x && playerY == behindLine[i].y)
+					break;
+				else
+					auxBehindLine.push({'x': behindLine[i].x, 'y': behindLine[i].y});
+			auxBehindLine.push({'x':playerX,'y':playerY});
+			return auxBehindLine;
+		}
+
 		function onMargin() {
 			return playerX == canvas_margin || playerX == width - canvas_margin || playerY == height - canvas_margin || playerY == canvas_margin;
+		}
+		function drawLine() {
+			for(var i = 1; i < behindLine.length ; i++ )
+			{
+				context.strokeStyle = "blue";
+				context.beginPath();
+				context.moveTo(behindLine[i-1].x,behindLine[i-1].y);
+				context.lineTo(behindLine[i].x,behindLine[i].y);
+				context.closePath();
+				context.stroke();
+			}
 		}
 
 		setInterval(mainLoop,33);
