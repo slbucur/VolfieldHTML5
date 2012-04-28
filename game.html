@@ -92,7 +92,11 @@
 		}
 
 		function onMargin() {
-			return playerX == canvas_margin || playerX == width - canvas_margin || playerY == height - canvas_margin || playerY == canvas_margin;
+			for (var i = 1; i< marginLine.length; i++){
+				if (playerX == marginLine[i].x && playerY == marginLine[i].y)
+				return true;
+			}
+			return false;
 		}
 
 		function drawLine(line,color) {
