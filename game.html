@@ -14,7 +14,7 @@
 		var context = canvas.getContext( '2d' );
 		var playerX = canvas_margin;
 		var	playerY = canvas_margin;
-		var speed = 2;
+		var speed = 5;
 		window.addEventListener("keydown",doKeyDown,true);
 
 		function mainLoop(){
@@ -42,15 +42,23 @@
 			switch (event.keyCode) {
 					case 38: /*Up arrow*/
 						playerY-=speed;
+						if(playerY < canvas_margin)
+							playerY = canvas_margin;
 						break;
 					case 40: /*Down arrow*/
 						playerY +=speed;
+						if(playerY > height - canvas_margin)
+							playerY = height - canvas_margin;
 						break;
 					case 37: /*Left arrow*/
 						playerX -=speed;
+						if(playerX < canvas_margin)
+							playerX = canvas_margin;
 						break;
 					case 39: /*Right arrow*/
 						playerX +=speed;
+						if(playerX > width - canvas_margin)
+							playerX = width - canvas_margin;
 						break;
 			}
 		}
